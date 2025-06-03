@@ -1,0 +1,39 @@
+name: Refresh Undervalued Stock Scan
+
+on:
+  schedule:
+    # Every 2 weeks on Monday at 5 AM UTC
+    - cron: '0 5 */14 * *'
+
+  workflow_dispatch:  # allows manual runs too
+
+jobs:
+  run-analysis:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run scanner
+        run: |
+          python scanner.py
+
+      # Optional: Save output to repo (needs commit permissions)
+      - name: Commit results
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add results.csv
+          git commit -m "Updated undervalued stocks list"
+          git push
