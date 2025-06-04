@@ -2,8 +2,14 @@
 import streamlit as st
 import pandas as pd
 
+
+
 st.title("Undervalued Stock Screener")
 st.caption("Updated every 2 weeks — via scheduled GitHub Action")
+
+import time
+st.write("App loaded at:", time.ctime())
+
 
 try:
     df = pd.read_csv("undervalued.csv")  # or .pkl if you're using that
