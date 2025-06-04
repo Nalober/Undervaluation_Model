@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-import streamlit as st
-import pandas as pd
-
-st.title("Undervalued Stock Screener")
-st.caption("Based on P/E Ratio < 15")
-
-df = pd.read_csv("undervalued.csv")
-st.dataframe(df)
-=======
 import streamlit as st
 import pandas as pd
 from scanner import get_nasdaq_tickers, scan_tickers
@@ -29,4 +19,3 @@ else:
     # Optionally offer download
     csv = df.to_csv(index=False).encode("utf-8")
     st.download_button("Download CSV", csv, "undervalued.csv", "text/csv")    
->>>>>>> 3e7e0b0 (Update app to generate undervalued list dynamically)
