@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import streamlit as st
 import pandas as pd
 
@@ -29,4 +29,4 @@ else:
     # Optionally offer download
     csv = df.to_csv(index=False).encode("utf-8")
     st.download_button("Download CSV", csv, "undervalued.csv", "text/csv")    
->>>>>>> 3e7e0b0 (Update app to generate undervalued list dynamically)
+
