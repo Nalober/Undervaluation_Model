@@ -7,7 +7,7 @@ st.caption("Based on P/E Ratio < 15")
 
 df = pd.read_csv("undervalued.csv")
 st.dataframe(df)
-=======
+
 import streamlit as st
 import pandas as pd
 from scanner import get_nasdaq_tickers, scan_tickers
