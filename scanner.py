@@ -88,7 +88,7 @@ def is_undervalued(r):
     )
 
     
-def scan_tickers(tickers, limit=1000):
+def scan_tickers(tickers, limit=100):
     results = []
     for t in tickers[:limit]: 
         r = get_financial_ratios(t) 
@@ -98,6 +98,6 @@ def scan_tickers(tickers, limit=1000):
     return pd.DataFrame(results)
 
 
-tickers = scan_tickers(get_nasdaq_tickers())
+tickers = get_nasdaq_tickers()
 df = scan_tickers(tickers)
 df.to_csv("undervalued.csv", index = False)
