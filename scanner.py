@@ -98,6 +98,6 @@ def scan_tickers(tickers, limit=1000):
     return pd.DataFrame(results)
 
 
-df = scan_tickers(get_nasdaq_tickers())
-
+tickers = scan_tickers(get_nasdaq_tickers())
+df = scan_tickers(tickers)
 df.to_csv("undervalued.csv", index = False)
