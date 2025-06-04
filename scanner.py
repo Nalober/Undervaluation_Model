@@ -91,7 +91,7 @@ def is_undervalued(r):
 def scan_tickers(tickers, limit=1000):
     results = []
     for t in tickers[:limit]: 
-        r = get_financial_ratios(t) #may not be filtering if r is getting reset to this
+        r = get_financial_ratios(t) 
         if is_undervalued(r):
             results.append(r)
         time.sleep(.2)
@@ -99,4 +99,5 @@ def scan_tickers(tickers, limit=1000):
 
 
 df = scan_tickers(get_nasdaq_tickers())
-print(df)
+
+df.to_csv("undervalued.csv", index = False)
