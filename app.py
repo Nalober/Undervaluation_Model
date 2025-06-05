@@ -19,7 +19,8 @@ def get_cached_results():
 
 if st.button(" Refresh Data Now"):
     st.cache_data.clear()
-    st.experimental_rerun()
+    st.rerun()
+
 
 with st.spinner("Scanning tickers... please wait (~1–2 mins)"):
     df = get_cached_results()
