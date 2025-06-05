@@ -96,3 +96,4 @@ def scan_tickers(tickers, limit=100):
             results.append(r)
         time.sleep(.2)
     return pd.DataFrame(results)
+
