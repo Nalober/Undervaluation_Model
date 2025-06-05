@@ -78,9 +78,6 @@ def get_financial_ratios(ticker):
             "NetMargin": net_margin,
             "PE": pe_ratio,
             "PEG": peg_ratio,
-            "ROE": roe,
-            "DebtToEquity": debt_to_equity,
-            "FCF": fcf,
             "RevenueGrowth": revenue_growth,
         }
             
@@ -96,10 +93,7 @@ def is_undervalued(r):
     r 
     and r.get("PE") is not None and r["PE"] < 15                 # Low Price/Earnings Ratio
         and r.get("PEG") is not None and r["PEG"] < 1.0              # Low Price/Earnings-to-Growth
-        and r.get("ROE") is not None and r["ROE"] > 0.10             # Healthy Return on Equity
         and r.get("NetMargin") is not None and r["NetMargin"] > 0.10 # Good profit margins
-        and r.get("DebtToEquity") is not None and r["DebtToEquity"] < 1.0  # Low leverage
-        and r.get("FCF") is not None and r["FCF"] > 0                # Positive Free Cash Flow
         and r.get("RevenueGrowth") is not None and r["RevenueGrowth"] > 0.05  # Healthy growth
         and r.get("NetIncome") is not None and r["NetIncome"] > 0    # Actually profitable
         and r.get("Revenue") is not None and r["Revenue"] > 0)
