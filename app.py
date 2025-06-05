@@ -9,9 +9,16 @@ st.caption("Updated every 2 weeks — via scheduled GitHub Action")
 import time
 st.write("App loaded at:", time.ctime())
 
+with st.spinner("Scanning tickers... please wait (~1–2 mins)"):
+    tickers = get_nasdaq_tickers()
+    df = scan_tickers(tickers, limit=100)  # Adjust limit if needed
 
-tickers = get_nasdaq_tickers()
-df = scan_tickers(tickers, limit=100)  # Or load a saved version
+if df.empty:
+    st.warning("No undervalued stocks found.")
+else:
+    st.success(f" Found {len(df)} undervalued stocks")
+    st.dataframe(df)
 
-# Optionally save
-df.to_csv("undervalued.csv", index=False)
+    # Optionally offer download
+    csv = df.to_csv(index=False).encode("utf-8")
+    st.download_button("Download CSV", csv, "undervalued.csv", "text/csv")
