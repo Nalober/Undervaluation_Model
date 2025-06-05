@@ -60,9 +60,8 @@ def get_financial_ratios(ticker):
         pe_ratio = float(pe_ratio_raw)
 
         info = stock.info
-        pe_ratio = info.get("trailingPE")
         net_margin = net_income / revenue if revenue else None  # Redundant with info['netMargins']
-        revenue_growth = info.get("revenueGrowth")
+    
 
 
         return {
@@ -84,7 +83,7 @@ def get_financial_ratios(ticker):
 def is_undervalued(r):
     return (
     r 
-    and r.get("PE") is not None and r.get("PE") < 15                 # Low Price/Earnings Ratio
+    and r.get("PE") is not None and r["PE"] < 15                 # Low Price/Earnings Ratio
         and r["NetMargin"] > 0.10 # Good profit margins
         and r["NetIncome"] > 0    # Actually profitable
         and r["Revenue"] > 0)
