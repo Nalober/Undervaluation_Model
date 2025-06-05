@@ -37,7 +37,7 @@ def get_nasdaq_tickers():
     print(tickers[:10])
     ftp.quit()
 
-    return list(set([t for t in tickers if isinstance(t, str) and t.isalpha()]))   
+    return list(set([t for t in tickers if isinstance(t, str)]))   
 
 
 
@@ -84,7 +84,7 @@ def is_undervalued(r):
     and r['pe_ratio'] < 15 
     and r['NetIncome'] > 0
     and r['NetMargin'] > 0
-    and r['Revenue']  >0
+    and r['Revenue']  > 0
     )
 
     
@@ -96,8 +96,3 @@ def scan_tickers(tickers, limit=100):
             results.append(r)
         time.sleep(.2)
     return pd.DataFrame(results)
-
-
-tickers = get_nasdaq_tickers()
-df = scan_tickers(tickers)
-df.to_csv("undervalued.csv", index = False)
