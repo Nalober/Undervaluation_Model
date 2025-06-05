@@ -10,9 +10,6 @@ st.caption("Updated every 2 weeks — via scheduled GitHub Action")
 
 st.write("App loaded at:", time.ctime())
 
-if st.button(" Refresh Data Now"):
-    st.cache_data.clear()
-    st.experimental_rerun()
 
 # This function caches results for 2 weeks
 @st.cache_data(ttl=60 * 60 * 24 * 14)
@@ -20,12 +17,20 @@ def get_cached_results():
     tickers = get_nasdaq_tickers()
     return scan_tickers(tickers, limit=100)
 
+if st.button(" Refresh Data Now"):
+    st.cache_data.clear()
+    st.experimental_rerun()
+
 with st.spinner("Scanning tickers... please wait (~1–2 mins)"):
     df = get_cached_results()
+
+
+
 
 if df.empty:
     st.warning("No undervalued stocks found.")
 else:
+    df = df.sort_values(by="pe_ratio", ascending=True)
     st.success(f"Found {len(df)} undervalued stocks")
     st.dataframe(df)
 

@@ -56,18 +56,12 @@ def get_financial_ratios(ticker):
         latest_balance = balance.iloc[0]
         revenue = latest_income.get('Total Revenue', 0)
         net_income = latest_income.get('Net Income', 0)
-        total_assets = latest_balance.get('Total Assets', 0)
-        total_liabilities = latest_balance.get('Total Liab', 0)
         pe_ratio_raw = stock.info.get('trailingPE')
         pe_ratio = float(pe_ratio_raw)
-       
+
         info = stock.info
         pe_ratio = info.get("trailingPE")
-        peg_ratio = info.get("pegRatio")
-        roe = info.get("returnOnEquity")
         net_margin = net_income / revenue if revenue else None  # Redundant with info['netMargins']
-        debt_to_equity = info.get("debtToEquity")
-        fcf = info.get("freeCashflow")
         revenue_growth = info.get("revenueGrowth")
 
 
@@ -77,7 +71,6 @@ def get_financial_ratios(ticker):
             "NetIncome": net_income,
             "NetMargin": net_margin,
             "PE": pe_ratio,
-            "PEG": peg_ratio,
             "RevenueGrowth": revenue_growth,
         }
             
@@ -92,11 +85,10 @@ def is_undervalued(r):
     return (
     r 
     and r.get("PE") is not None and r["PE"] < 15                 # Low Price/Earnings Ratio
-        and r.get("PEG") is not None and r["PEG"] < 1.0              # Low Price/Earnings-to-Growth
-        and r.get("NetMargin") is not None and r["NetMargin"] > 0.10 # Good profit margins
-        and r.get("RevenueGrowth") is not None and r["RevenueGrowth"] > 0.05  # Healthy growth
-        and r.get("NetIncome") is not None and r["NetIncome"] > 0    # Actually profitable
-        and r.get("Revenue") is not None and r["Revenue"] > 0)
+        and r["NetMargin"] > 0.10 # Good profit margins
+        and r["RevenueGrowth"] > 0.05  # Healthy growth
+        and r["NetIncome"] > 0    # Actually profitable
+        and r["Revenue"] > 0)
 
     
 def scan_tickers(tickers, limit=1000):
