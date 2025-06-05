@@ -86,7 +86,6 @@ def is_undervalued(r):
     r 
     and r.get("PE") is not None and r["PE"] < 15                 # Low Price/Earnings Ratio
         and r["NetMargin"] > 0.10 # Good profit margins
-        and r["RevenueGrowth"] > 0.05  # Healthy growth
         and r["NetIncome"] > 0    # Actually profitable
         and r["Revenue"] > 0)
 
