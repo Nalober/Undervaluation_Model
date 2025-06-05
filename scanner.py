@@ -105,7 +105,7 @@ def is_undervalued(r):
         and r.get("Revenue") is not None and r["Revenue"] > 0)
 
     
-def scan_tickers(tickers, limit=100):
+def scan_tickers(tickers, limit=1000):
     results = []
     for t in tickers[:limit]: 
         r = get_financial_ratios(t) 
