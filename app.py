@@ -31,7 +31,7 @@ with st.spinner("Scanning tickers... please wait (~1–2 mins)"):
 if df.empty:
     st.warning("No undervalued stocks found.")
 else:
-    df = df.sort_values(by="pe_ratio", ascending=True)
+    df = df.sort_values(by="PE", ascending=True)
     st.success(f"Found {len(df)} undervalued stocks")
     st.dataframe(df)
 
